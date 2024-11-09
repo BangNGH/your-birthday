@@ -18,14 +18,32 @@
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
+    <style>
+      #name:hover {
+        animation: pulse 1s infinite;
+        cursor: pointer;
+      }
+      #name {
+        animation: pulse 1s infinite;
+      }
+      /* #date__of__birth {
+        animation: pulse 1s infinite;
+      } */
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+    </style>
   </head>
   <body>
     <div id="wrapper">
+     
       <div class="flag__birthday">
         <img src="./images/1.png" alt="" width="350" class="flag__left" />
         <img src="./images/1.png" alt="" width="350" class="flag__right" />
       </div>
-      <div class="content">
+      <div class="content" style="margin-bottom: 50px;">
         <div class="left">
           <div class="title">
             <h1 class="happy">
@@ -49,7 +67,7 @@
               <img src="./images/hat.png" alt="" width="130" />
             </div>
           </div>
-          <div class="date__of__birth">
+          <div id ="date__of__birth" class="date__of__birth">
             <span></span>
           </div>
          
@@ -64,10 +82,10 @@
                 alt=""
               />
             </div>
-            <div class="name">
-              <i class="fa-solid fa-heart"></i>
-              <span id="user-name"></span>
-              <i class="fa-solid fa-heart"></i>
+            <div class="name" id="name">
+              <i id="play-button" style="margin-left: 5px;" class="fa fa-play"></i>
+              <span id="user-name" style="margin: 0 20px;"></span>
+              <i class="fa-solid fa-heart" style="margin-right: 5px;"></i>
             </div>
             <div class="balloon_one">
               <img width="100px" src="./images/balloon1.png" alt="" />
@@ -85,10 +103,10 @@
       <div class="decorate_star star4" style="--t: 15.6s;"></div>
       <div class="decorate_star star5" style="--t: 15.8s;"></div>
 
-      <div class="decorate_bottom">
+      <div class="decorate_bottom" id="decorate_bottom">
         <img src="./images/decorate.png" alt="" width="100" />
       </div>
-
+      <audio id="birthday-audio" src="/korea-hbd.mp3" autoplay></audio>
       <div class="box__letter">
         <div class="letter__border">
           <div class="letter">
@@ -150,6 +168,7 @@
         </div>
       </div>
     </div>
+    <button id="hidden-play-button" type="button" style="display: none;">Play</button>
   </body>
   <script>
         const userInfo = JSON.parse(localStorage.getItem("birthdayUserInfo"));
@@ -185,9 +204,18 @@
           },0)
         }
        document.addEventListener("DOMContentLoaded", function() {
-        if (performance.navigation.type === 1) {
-            window.location.href = "/";
-        }
-    });
+          if (performance.navigation.type === 1) {
+              window.location.href = "/";
+          }
+        
+          const hiddenButton = document.getElementById("hidden-play-button");
+          hiddenButton.click();
+          const audio = document.getElementById("birthday-audio");
+          audio.play();
+          const playButton = document.getElementById("name");
+          playButton.addEventListener("click", function() {
+            audio.play();
+          });
+       });
   </script>
 </html>
